@@ -15,7 +15,6 @@ SecureAuth is a privacy-first two-factor authentication app that never touches t
 - [Usage](#usage)
 - [Backup & Restore](#backup--restore)
 - [Threat Model](#threat-model)
-- [Project Structure](#project-structure)
 - [Contributing](#contributing)
 - [License](#license)
 
@@ -224,42 +223,6 @@ SecureAuth is a **software authenticator**. Its guarantees are limited by the se
 | Network attack surface | **Excellent** | Zero network access |
 | Tamper detection | **Good** | Hardware attestation is authoritative |
 | Resistance to rooted attackers | **Limited** | Inherent to all software authenticators |
-
----
-
-## Project Structure
-
-```
-SecureAuth/
-├── .github/workflows/          GitHub Actions CI/CD
-├── app/
-│   ├── build.gradle.kts
-│   ├── proguard-rules.pro
-│   └── src/main/
-│       ├── AndroidManifest.xml
-│       ├── java/com/secureauth/
-│       │   ├── SecureAuthApp.kt
-│       │   ├── MainActivity.kt
-│       │   ├── core/
-│       │   │   ├── crypto/     Tink, Argon2id, SQLCipher key manager
-│       │   │   ├── otp/        TOTP/HOTP generators, otpauth parser
-│       │   │   ├── security/   Attestation, integrity, lockout, clip guard
-│       │   │   └── util/
-│       │   ├── data/           Room database, repositories, DataStore
-│       │   ├── di/             Hilt modules
-│       │   └── ui/
-│       │       ├── theme/      Material 3 color scheme
-│       │       ├── navigation/
-│       │       ├── screens/    Account list, add, scan, backup, settings
-│       │       └── components/ Reusable Compose components
-│       └── res/
-├── gradle/libs.versions.toml   Version catalog
-├── build.gradle.kts
-├── settings.gradle.kts
-├── LICENSE                     GPL-3.0
-├── README.md
-└── SECURITY.md
-```
 
 ---
 
