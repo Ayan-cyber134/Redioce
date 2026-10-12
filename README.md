@@ -1,8 +1,8 @@
-# SecureAuth
+# Redioce
 
 **A military-grade, fully offline TOTP/HOTP authenticator for Android 8.0+**
 
-SecureAuth is a privacy-first two-factor authentication app that never touches the network, encrypts everything at rest with hardware-backed keys, and provides authenticated encrypted backups protected by a one-time 256-bit recovery key.
+Redioce is a privacy-first two-factor authentication app that never touches the network, encrypts everything at rest with hardware-backed keys, and provides authenticated encrypted backups protected by a one-time 256-bit recovery key.
 
 ---
 
@@ -105,7 +105,7 @@ SecureAuth is a privacy-first two-factor authentication app that never touches t
 
 ### From GitHub Releases
 
-1. Download the latest `SecureAuth-vX.Y.Z.apk` from the [Releases page](../../releases)
+1. Download the latest `Redioce-vX.Y.Z.apk` from the [Releases page](../../releases)
 2. Enable "Install unknown apps" for your browser or file manager
 3. Open the APK and tap **Install**
 4. Launch SecureAuth and grant camera permission when adding accounts by QR
@@ -204,7 +204,7 @@ Tap the trash icon on any account card. Deletion is permanent and cannot be undo
 
 ### What SecureAuth Cannot Protect Against
 
-SecureAuth is a **software authenticator**. Its guarantees are limited by the security of the underlying Android platform. The following threats are **out of scope**:
+Redioce is a **software authenticator**. Its guarantees are limited by the security of the underlying Android platform. The following threats are **out of scope**:
 
 - **Rooted device with Frida/Objection attached** — An attacker with root, physical access, and dynamic instrumentation tooling can hook the app's crypto routines and extract secrets from memory. This is true of every software authenticator, including Aegis, Google Authenticator, and Microsoft Authenticator.
 - **Compromised TEE firmware** — If the device's Trusted Execution Environment is compromised, hardware attestation and Keystore guarantees are void.
