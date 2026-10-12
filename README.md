@@ -15,8 +15,6 @@ SecureAuth is a privacy-first two-factor authentication app that never touches t
 - [Usage](#usage)
 - [Backup & Restore](#backup--restore)
 - [Threat Model](#threat-model)
-- [Contributing](#contributing)
-- [License](#license)
 
 ---
 
@@ -225,34 +223,3 @@ SecureAuth is a **software authenticator**. Its guarantees are limited by the se
 | Resistance to rooted attackers | **Limited** | Inherent to all software authenticators |
 
 ---
-
-## Contributing
-
-Contributions are welcome. Before opening a pull request:
-
-1. Read [SECURITY.md](SECURITY.md) to understand the security model
-2. Follow the existing code style (Kotlin, Compose, Hilt conventions)
-3. Add tests for security-critical changes
-4. Update the README if you add user-facing features
-
-For security vulnerabilities, **do not open a public issue**. See [SECURITY.md](SECURITY.md).
-
----
-
-## License
-
-SecureAuth is released under the **GNU General Public License v3.0**. See [LICENSE](LICENSE) for the full text.
-
-```
-Copyright (C) 2026 SecureAuth Contributors
-
-This program is free software: you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation, either version 3 of the License, or
-(at your option) any later version.
-
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-GNU General Public License for more details.
-```
