@@ -15,7 +15,7 @@ Only the latest stable release receives security updates.
 
 **Do not open a public GitHub issue for security vulnerabilities.**
 
-If you believe you have found a security vulnerability in SecureAuth, please report it privately via GitHub's [private vulnerability reporting](https://docs.github.com/en/code-security/security-advisories/guidance-on-reporting-and-writing/privately-reporting-a-security-vulnerability) feature or by emailing the maintainers at:
+If you believe you have found a security vulnerability in Redioce, please report it privately via GitHub's [private vulnerability reporting](https://docs.github.com/en/code-security/security-advisories/guidance-on-reporting-and-writing/privately-reporting-a-security-vulnerability) feature or by emailing the maintainers at:
 
 ```
 support@connecto.int.yt
@@ -90,7 +90,7 @@ The following are **not** considered vulnerabilities in SecureAuth because they 
 
 ### Security Guarantees
 
-SecureAuth guarantees, on a **non-rooted device with a locked bootloader**:
+Redioce guarantees, on a **non-rooted device with a locked bootloader**:
 
 1. Secrets stored in the SQLCipher database cannot be read without first unlocking the device and passing the biometric prompt
 2. Backup files cannot be decrypted without the correct 256-bit recovery key
@@ -98,7 +98,7 @@ SecureAuth guarantees, on a **non-rooted device with a locked bootloader**:
 4. Screenshots and screen recordings cannot capture app content
 5. Clipboard contents auto-clear within the configured timeout
 
-SecureAuth **does not guarantee**:
+Redioce **does not guarantee**:
 
 1. Protection against a determined attacker with root, physical access, and dynamic instrumentation tooling
 2. Protection against a compromised TEE or bootloader
@@ -168,7 +168,7 @@ SecureAuth **does not guarantee**:
 
 ### Rooted Devices
 
-SecureAuth detects root via multiple heuristics and via hardware attestation. On a rooted device:
+Redioce detects root via multiple heuristics and via hardware attestation. On a rooted device:
 
 - Heuristic checks (file paths, Magisk package, `su` binary) are bypassable via Magisk DenyList, Shamiko, or Frida hooks
 - Hardware attestation via TEE is **not** bypassable on a device with a locked bootloader, because the TEE signs the boot state with a hardware key the normal world never sees
@@ -197,7 +197,7 @@ If the user loses their backup recovery key, the backup is **permanently unrecov
 2. **Keep your device updated.** Install Android security patches as soon as they are available.
 3. **Do not root your device.** Rooting disables the security guarantees that SecureAuth relies on.
 4. **Store your backup recovery key securely.** Use a password manager or a physical safe. Do not email it to yourself or store it in plaintext notes.
-5. **Verify the app's signature.** Only install SecureAuth from official sources (GitHub Releases or Google Play).
+5. **Verify the app's signature.** Only install Redioce from official sources (GitHub Releases or Google Play).
 6. **Disable OEM Unlocking** in Developer Options if you do not need it.
 7. **Do not enable USB debugging** unless you are actively developing.
 8. **Verify the app's integrity check** in Settings shows "Device Integrity Verified."
