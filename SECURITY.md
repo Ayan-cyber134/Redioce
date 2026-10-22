@@ -56,7 +56,7 @@ We follow a **90-day coordinated disclosure** policy. If a fix is not available 
 
 ### Out of Scope
 
-The following are **not** considered vulnerabilities in SecureAuth because they are inherent to any software authenticator running on Android:
+The following are **not** considered vulnerabilities in Redioce because they are inherent to any software authenticator running on Android:
 
 - **Attacks requiring a rooted device with physical access and dynamic instrumentation (Frida, Objection, etc.)** — If an attacker can hook the app's process, they can extract secrets from memory. This is true of Aegis, Google Authenticator, Microsoft Authenticator, and every other software 2FA app.
 - **Attacks requiring a compromised TEE or bootloader** — If the device's Trusted Execution Environment is compromised, hardware-backed guarantees are void by definition.
