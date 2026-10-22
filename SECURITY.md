@@ -51,7 +51,7 @@ We follow a **90-day coordinated disclosure** policy. If a fix is not available 
 - Authentication bypass (biometric lock, app lock)
 - Data exfiltration (any path that leaks secrets)
 - Backup format vulnerabilities (tampering, weak key derivation)
-- Privilege escalation (from unprivileged app to SecureAuth data)
+- Privilege escalation (from unprivileged app to Redioce data)
 - Hardware attestation bypass
 
 ### Out of Scope
