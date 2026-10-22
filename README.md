@@ -189,7 +189,7 @@ Tap the trash icon on any account card. Deletion is permanent and cannot be undo
 
 ## Threat Model
 
-### What SecureAuth Protects Against
+### What Redioce Protects Against
 
 | Threat | Mitigation |
 |---|---|
