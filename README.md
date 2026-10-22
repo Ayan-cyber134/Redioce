@@ -202,7 +202,7 @@ Tap the trash icon on any account card. Deletion is permanent and cannot be undo
 | Casual root | Heuristic + attestation detection |
 | Key theft from device | Android Keystore / StrongBox hardware isolation |
 
-### What SecureAuth Cannot Protect Against
+### What Redioce Cannot Protect Against
 
 Redioce is a **software authenticator**. Its guarantees are limited by the security of the underlying Android platform. The following threats are **out of scope**:
 
