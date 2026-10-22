@@ -108,7 +108,7 @@ Redioce is a privacy-first two-factor authentication app that never touches the 
 1. Download the latest `Redioce-vX.Y.Z.apk` from the [Releases page](../../releases)
 2. Enable "Install unknown apps" for your browser or file manager
 3. Open the APK and tap **Install**
-4. Launch SecureAuth and grant camera permission when adding accounts by QR
+4. Launch Redioce and grant camera permission when adding accounts by QR
 
 ### From Google Play
 
