@@ -97,7 +97,9 @@ Redioce is a privacy-first two-factor authentication app that never touches the 
 
 ## Screenshots
 
-> Screenshots coming soon.
+![Home Screen](screenshots/home.png)
+
+![Settings Screen](screenshots/settings.png)
 
 ---
 
