@@ -49,7 +49,6 @@ Redioce is a privacy-first two-factor authentication app that never touches the 
 - **Blur codes** — Privacy mode that hides codes until tapped (blur on Android 12+, hide on older)
 - **Search** — Real-time filtering by issuer or label
 - **Sort options** — By issuer, recently used, or manual
-- **Biometric enrollment awareness** — No prompt for users without biometrics enrolled
 
 ---
 
@@ -70,7 +69,7 @@ Redioce is a privacy-first two-factor authentication app that never touches the 
 │   Room + SQLCipher (AES-256) · DataStore · Tink AEAD    │
 ├─────────────────────────────────────────────────────────┤
 │                    Platform Layer                       │
-│  Android Keystore · StrongBox · BiometricPrompt · TEE   │
+│  Android Keystore · StrongBox · TEE   │
 └─────────────────────────────────────────────────────────┘
 ```
 
@@ -121,7 +120,6 @@ Redioce is a privacy-first two-factor authentication app that never touches the 
 - **Android 8.0 (API 26)** or higher
 - **ARM64 or ARMv7** processor
 - **Camera** (optional, for QR scanning)
-- **Biometric hardware** (optional, for app lock)
 
 ---
 
