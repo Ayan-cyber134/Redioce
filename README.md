@@ -11,7 +11,6 @@ Redioce is a secure two-factor authentication app designed to keep your accounts
 - **Manual Entry:** Supports `otpauth://` URIs and manual secret entry.
 - **Encrypted Storage:** SQLCipher AES-256 database encryption.
 - **Hardware Security:** Android Keystore, StrongBox preference, and hardware attestation.
-- **Biometric Lock:** Class 3 biometrics with device credential fallback.
 - **Encrypted Backups:** AES-256-GCM with Argon2id key derivation.
 - **Privacy Protection:** Screenshot blocking, clipboard auto-clear, and hidden OTP codes.
 - **Fully Offline:** No internet permission, telemetry, ads, or trackers.
