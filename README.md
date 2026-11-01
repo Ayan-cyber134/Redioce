@@ -92,7 +92,7 @@ Redioce protects against:
 
 - Network-based attacks through the absence of internet permission.
 - Database and backup theft through encryption.
-- Unauthorized access through biometric authentication.
+- Unauthorized access through pin code authentication.
 - Screenshot capture and clipboard snooping.
 - Casual root-level attacks through heuristic and attestation checks.
 
