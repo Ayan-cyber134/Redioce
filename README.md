@@ -1,98 +1,40 @@
 # Redioce
 
-**A military-grade, fully offline TOTP/HOTP authenticator for Android 8.0+**
+**A fully offline, privacy-first TOTP/HOTP authenticator for Android 8.0+.**
 
-Redioce is a privacy-first two-factor authentication app that never touches the network, encrypts everything at rest with hardware-backed keys, and provides authenticated encrypted backups protected by a one-time 256-bit recovery key.
-
----
-
-## Table of Contents
-
-- [Features](#features)
-- [Security Architecture](#security-architecture)
-- [Screenshots](#screenshots)
-- [Installation](#installation)
-- [Usage](#usage)
-- [Backup & Restore](#backup--restore)
-- [Threat Model](#threat-model)
-
----
+Redioce is a secure two-factor authentication app designed to keep your accounts private. It works entirely offline, encrypts stored secrets using Android Keystore-backed keys, and provides encrypted backups protected by a unique 256-bit recovery key.
 
 ## Features
 
-### Core 2FA
-- **TOTP (RFC 6238)** — Time-based one-time passwords with SHA1/SHA256/SHA512, 6–8 digits, configurable period
-- **HOTP (RFC 4226)** — Counter-based one-time passwords with manual or automatic counter increment
-- **QR code scanning** — CameraX + ML Kit for offline barcode detection
-- **Manual entry** — Full `otpauth://` URI parsing and manual key entry with strict validation
-- **Google Authenticator compatible** — Codes verify against any TOTP RFC 6238 implementation
-
-### Security
-- **Encrypted database** — SQLCipher (AES-256) with a Keystore-backed passphrase
-- **Hardware-backed keys** — Android Keystore with StrongBox preference on supported devices
-- **Hardware attestation** — Unforgeable boot state verification via TEE-signed certificates
-- **Encrypted backups** — Argon2id key derivation + AES-256-GCM, unique 256-bit key per backup
-- **Biometric app lock** — Class 3 biometrics with device credential fallback
-- **Auto-lock** — Configurable re-lock timeout when backgrounded
-- **Screenshot blocking** — `FLAG_SECURE` on all activities
-- **Clipboard guard** — Auto-clearing OTP codes with sensitivity flag on Android 13+
-- **Root/Frida/Xposed detection** — Heuristic checks with hardware-backed authoritative signal
-
-### Privacy
-- **Zero network access** — The `INTERNET` permission is not declared; the app is physically incapable of exfiltration
-- **No telemetry** — No analytics, no crash reporting, no ads, no trackers
-- **No cloud backup** — `allowBackup="false"` and explicit data extraction exclusions
-- **Fully offline** — All operations run on-device
-
-### User Experience
-- **Material You dynamic theming** — Adapts to the system wallpaper on Android 12+
-- **Blur codes** — Privacy mode that hides codes until tapped (blur on Android 12+, hide on older)
-- **Search** — Real-time filtering by issuer or label
-- **Sort options** — By issuer, recently used, or manual
-
----
+- **TOTP & HOTP:** RFC 6238 and RFC 4226 support with SHA1, SHA256, and SHA512.
+- **QR Scanning:** Offline QR detection using CameraX and ML Kit.
+- **Manual Entry:** Supports `otpauth://` URIs and manual secret entry.
+- **Encrypted Storage:** SQLCipher AES-256 database encryption.
+- **Hardware Security:** Android Keystore, StrongBox preference, and hardware attestation.
+- **Biometric Lock:** Class 3 biometrics with device credential fallback.
+- **Encrypted Backups:** AES-256-GCM with Argon2id key derivation.
+- **Privacy Protection:** Screenshot blocking, clipboard auto-clear, and hidden OTP codes.
+- **Fully Offline:** No internet permission, telemetry, ads, or trackers.
+- **Modern UI:** Material You theming, account search, and sorting.
 
 ## Security Architecture
 
-```
-┌─────────────────────────────────────────────────────────┐
-│                   UI (Jetpack Compose)                  │
-│          Material 3 · Dynamic Color · Edge-to-Edge       │
-├─────────────────────────────────────────────────────────┤
-│                  ViewModels (Hilt)                      │
-│     StateFlow · Coroutines · Hilt Navigation            │
-├─────────────────────────────────────────────────────────┤
-│                Domain (Pure Kotlin)                     │
-│    TOTP/HOTP · otpauth:// parser · Backup crypto        │
-├─────────────────────────────────────────────────────────┤
-│                      Data Layer                         │
-│   Room + SQLCipher (AES-256) · DataStore · Tink AEAD    │
-├─────────────────────────────────────────────────────────┤
-│                    Platform Layer                       │
-│  Android Keystore · StrongBox · TEE   │
-└─────────────────────────────────────────────────────────┘
-```
+| Component | Technology |
+|---|---|
+| Database | SQLCipher AES-256 |
+| Key Storage | Android Keystore / StrongBox |
+| Backup Encryption | AES-256-GCM |
+| Key Derivation | Argon2id |
+| OTP Generation | HMAC-SHA1/256/512 |
+| Authentication | PinCode |
 
-### Cryptographic Primitives
+### Backup Cryptography
 
-| Purpose | Algorithm | Parameters |
-|---|---|---|
-| Database encryption | AES-256-GCM (SQLCipher) | 256-bit key, hardware-backed passphrase |
-| Backup encryption | AES-256-GCM | 128-bit tag, 12-byte nonce, 32-byte salt |
-| Backup key derivation | Argon2id | 64 MB memory, 3 iterations, 4-way parallelism |
-| Keystore wrapping | AES-256-GCM (Tink) | Hardware-backed master key |
-| OTP generation | HMAC-SHA1/256/512 | RFC 6238 / RFC 4226 |
-
-### Key Storage
-
-| Key | Storage | Protection |
-|---|---|---|
-| Tink master key | Android Keystore | Hardware-backed (StrongBox/TEE) |
-| Database passphrase | Encrypted with Tink, stored in SharedPreferences | Keystore-protected ciphertext |
-| TOTP/HOTP secrets | SQLCipher database | AES-256 at rest |
-| Backup key | Never stored | Displayed once to user |
-
----
+- **Recovery Key:** 256-bit
+- **Salt:** 32 random bytes
+- **Nonce:** 12 random bytes
+- **KDF:** Argon2id (64 MB memory, 3 iterations, 4 lanes)
+- **Encryption:** AES-256-GCM with a 128-bit authentication tag
 
 ## Screenshots
 
@@ -100,114 +42,58 @@ Redioce is a privacy-first two-factor authentication app that never touches the 
 
 ![Settings Screen](screenshots/settings.png)
 
----
-
 ## Installation
 
-### From GitHub Releases
+Download the latest APK from [GitHub Releases](../../releases).
 
-1. Download the latest `Redioce-vX.Y.Z.apk` from the [Releases page](../../releases)
-2. Enable "Install unknown apps" for your browser or file manager
-3. Open the APK and tap **Install**
-4. Launch Redioce and grant camera permission when adding accounts by QR
+1. Enable installation from unknown sources.
+2. Install the downloaded APK.
+3. Launch Redioce.
 
-### From Google Play
-
-> Not yet published. Coming soon.
-
-### Requirements
-
-- **Android 8.0 (API 26)** or higher
-- **ARM64 or ARMv7** processor
-- **Camera** (optional, for QR scanning)
-
----
-
+**Requirements:** Android 8.0 (API 26)+, ARM64 or ARMv7. Camera access is optional.
 
 ## Usage
 
-### Adding an Account
+### Adding Accounts
 
-**By QR code:**
-1. Tap the **+** button
-2. Choose **Scan QR Code**
-3. Point your camera at the QR code provided by your service
-
-**Manually:**
-1. Tap the **+** button
-2. Choose **Enter Key Manually**
-3. Fill in:
-   - **Type** — TOTP (time-based) or HOTP (counter-based)
-   - **Account name** — a label for your reference
-   - **Issuer** — the service name
-   - **Secret key** — the Base32-encoded secret
-   - **Algorithm** — usually SHA1
-   - **Digits** — usually 6
-   - **Period** — usually 30 seconds
+- Scan a QR code using the camera.
+- Manually enter the account name, issuer, secret, and OTP configuration.
 
 ### Generating Codes
 
-Codes are generated automatically and refreshed every 30 seconds (or your configured period). Tap the copy icon to copy a code to the clipboard — it auto-clears after 30 seconds.
+OTP codes refresh automatically according to the configured period. Copied codes are automatically cleared after 30 seconds.
 
-### Deleting an Account
+### Managing Accounts
 
-Tap the trash icon on any account card. Deletion is permanent and cannot be undone.
-
----
+Search, sort, and delete accounts directly from the home screen.
 
 ## Backup & Restore
 
+Redioce supports encrypted `.sab` backups.
+
 ### Creating a Backup
 
-1. Open **Settings → Export Encrypted Backup**
-2. Tap **Create Encrypted Backup**
-3. **Save the recovery key immediately** — it is shown only once
-4. Choose one of:
-   - **Copy** — copies the key to clipboard (persists until overwritten)
-   - **Save** — saves the `.sab` file to your chosen location
-   - **Share** — shares the file via the system share sheet
+1. Open **Settings → Export Encrypted Backup**.
+2. Create a backup.
+3. Save the displayed 256-bit recovery key securely.
+4. Save or share the encrypted backup file.
 
-### Restoring from Backup
+### Restoring a Backup
 
-1. Open **Settings → Import Encrypted Backup**
-2. Select your `.sab` file
-3. Enter the 256-bit recovery key you saved during export
-4. Tap **Decrypt and Import**
+1. Select your `.sab` file.
+2. Enter its recovery key.
+3. Decrypt and import your accounts.
 
-### Backup Security
-
-- **Encryption**: AES-256-GCM with 128-bit authentication tag
-- **Key derivation**: Argon2id (64 MB memory, 3 iterations, 4-way parallelism)
-- **Key space**: 2^256 ≈ 1.16 × 10^77 combinations
-- **Salt**: 32 random bytes per backup
-- **Nonce**: 12 random bytes per encryption
-- **Wrong password behavior**: Returns null; no oracle for attackers
-
-**If you lose the recovery key, the backup cannot be recovered.** There is no backdoor, no master key, and no recovery service.
-
----
+**Important:** Recovery keys are never stored by Redioce. Losing your key means losing access to that backup permanently.
 
 ## Threat Model
 
-### What Redioce Protects Against
+Redioce protects against:
 
-| Threat | Mitigation |
-|---|---|
-| Network-based attacks | No `INTERNET` permission |
-| Backup theft | AES-256-GCM + Argon2id with 256-bit key |
-| Database extraction | SQLCipher AES-256 with Keystore-backed passphrase |
-| Screenshot/recording | `FLAG_SECURE` on all activities |
-| Clipboard snooping | Auto-clear + `IS_SENSITIVE` flag |
-| Shoulder surfing | Blur codes mode |
-| Casual root | Heuristic + attestation detection |
-| Key theft from device | Android Keystore / StrongBox hardware isolation |
+- Network-based attacks through the absence of internet permission.
+- Database and backup theft through encryption.
+- Unauthorized access through biometric authentication.
+- Screenshot capture and clipboard snooping.
+- Casual root-level attacks through heuristic and attestation checks.
 
-### What Redioce Cannot Protect Against
-
-Redioce is a **software authenticator**. Its guarantees are limited by the security of the underlying Android platform. The following threats are **out of scope**:
-
-- **Rooted device with Frida/Objection attached** — An attacker with root, physical access, and dynamic instrumentation tooling can hook the app's crypto routines and extract secrets from memory. This is true of every software authenticator, including Aegis, Google Authenticator, and Microsoft Authenticator.
-- **Compromised TEE firmware** — If the device's Trusted Execution Environment is compromised, hardware attestation and Keystore guarantees are void.
-- **Malicious OS updates** — A custom ROM that bypasses the bootloader chain invalidates hardware attestation.
-- **Physical coercion** — No cryptographic system protects against someone forcing you to unlock your device.
-- **Weak backup key storage** — If you store the recovery key in an insecure location (e.g., plaintext notes, email drafts), that location becomes the weakest link.
+**Limitations:** Redioce cannot guarantee protection against compromised Android systems, malicious firmware, advanced root-level instrumentation, memory extraction, or physical coercion. Device security and recovery key storage remain important.
