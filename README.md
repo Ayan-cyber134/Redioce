@@ -38,7 +38,7 @@ Redioce is a secure two-factor authentication app designed to keep your accounts
 
 ## Screenshots
 
-![Home Screen](screenshots/home.png)
+![Home Screen](screenshots/home.jpg)
 
 ![Settings Screen](screenshots/settings.png)
 
